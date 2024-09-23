@@ -1,44 +1,46 @@
 <x-layouts.main>
-    <form action="{{ route('jiri.store') }}"
+    <h1 class="font-bold text-2xl">{{ __('Edit') }} {{ $project->name }}</h1>
+    <form action="{{ route('project.edit', $project) }}"
           method="post"
           class="flex flex-col gap-8 bg-slate-50 p-4">
         @csrf
+        @method('PATCH')
         <div class="flex flex-col gap-2">
             <label for="name"
-                   class="font-bold">{{ __('Jiri Name') }}
+                   class="font-bold">{{ __('Project Name') }}
                 @error('name')
                 <span class="block text-red-500">{{ $message }}</span>
                 @enderror
             </label>
             <input class="border border-grey-700 focus:invalid:border-pink-500 invalid:text-pink-600 rounded-md p-2"
                    type="text"
-                   value="{{ old('name') }}"
+                   value="{{ $project->name }}"
                    name="name"
                    id="name"
                    autocapitalize="none"
                    autocorrect="off"
                    spellcheck="false"
-                   placeholder="Projet Web 2024">
+                   placeholder="Site Client">
         </div>
         <div class="flex flex-col gap-2">
             <label for="date"
-                   class="font-bold">{{__('Starting at')}}
-                @error('starting_at')
+                   class="font-bold">{{__('Project Description')}}
+                @error('description')
                 <span class="block text-red-500">{{ $message }}</span>
                 @enderror
             </label>
-            <small>{{__('Should be in the format')}} 2024-06-10 09:17</small>
             <input class="border border-grey-700 focus:invalid:border-pink-500 invalid:text-pink-600 rounded-md p-2"
                    type="text"
-                   value="{{ old('starting_at') }}"
-                   name="starting_at"
-                   id="date"
-                   placeholder="2024-06-10 09:17">
+                   value="{{ $project->description }}"
+                   name="description"
+                   id="description"
+                   placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam animi aspernatur beatae consequatur dolorem impedit necessitatibus nisi non odio, rerum sed ut. At cum cupiditate, dignissimos dolorum facere nemo sapiente?">
+
         </div>
         <div>
             <button type="submit"
                     class="bg-blue-500 font-bold text-white mt-3 rounded-md p-2 px-4 tracking-wider uppercase">
-                {{ __('Create this Jiri') }}
+                {{ __('Edit this Project') }}
             </button>
         </div>
     </form>

@@ -1,44 +1,46 @@
 <x-layouts.main>
-    <form action="{{ route('jiri.store') }}"
+    <h1 class="font-bold text-2xl">{{ __('Edit') }} {{ $contact->name }}</h1>
+    <form action="{{ route('contact.edit', $contact) }}"
           method="post"
           class="flex flex-col gap-8 bg-slate-50 p-4">
         @csrf
+        @method('PATCH')
         <div class="flex flex-col gap-2">
             <label for="name"
-                   class="font-bold">{{ __('Jiri Name') }}
+                   class="font-bold">{{ __('Contact Name') }}
                 @error('name')
                 <span class="block text-red-500">{{ $message }}</span>
                 @enderror
             </label>
             <input class="border border-grey-700 focus:invalid:border-pink-500 invalid:text-pink-600 rounded-md p-2"
                    type="text"
-                   value="{{ old('name') }}"
+                   value="{{ $contact->name }}"
                    name="name"
                    id="name"
                    autocapitalize="none"
                    autocorrect="off"
                    spellcheck="false"
-                   placeholder="Projet Web 2024">
+                   placeholder="John Doe">
         </div>
         <div class="flex flex-col gap-2">
-            <label for="date"
-                   class="font-bold">{{__('Starting at')}}
-                @error('starting_at')
+            <label for="email"
+                   class="font-bold">{{__('Contact Email')}}
+                @error('email')
                 <span class="block text-red-500">{{ $message }}</span>
                 @enderror
             </label>
-            <small>{{__('Should be in the format')}} 2024-06-10 09:17</small>
             <input class="border border-grey-700 focus:invalid:border-pink-500 invalid:text-pink-600 rounded-md p-2"
                    type="text"
-                   value="{{ old('starting_at') }}"
-                   name="starting_at"
-                   id="date"
-                   placeholder="2024-06-10 09:17">
+                   value="{{ $contact->email }}"
+                   name="email"
+                   id="email"
+                   placeholder="john.doe@example.com">
+
         </div>
         <div>
             <button type="submit"
                     class="bg-blue-500 font-bold text-white mt-3 rounded-md p-2 px-4 tracking-wider uppercase">
-                {{ __('Create this Jiri') }}
+                {{ __('Edit this Contact') }}
             </button>
         </div>
     </form>
