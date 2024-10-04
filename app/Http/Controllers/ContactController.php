@@ -42,9 +42,9 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
-        if (!Gate::allows('show-contact', $contact)) {
+        /*if (!Gate::allows('show-contact', $contact)) {
             abort(403);
-        }
+        }*/
         return view('contact.show', compact('contact'));
     }
 
@@ -61,9 +61,9 @@ class ContactController extends Controller
      */
     public function update(ContactStoreRequest $request, Contact $contact)
     {
-        if (!Gate::allows('update-contact', $contact)) {
+        /*if (!Gate::allows('update-contact', $contact)) {
             abort(403);
-        }
+        }*/
         $contact->update($request->validated());
         return to_route('contact.show', $contact);
     }
@@ -73,9 +73,9 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        if (!Gate::allows('$destroy-contact', $contact)) {
+        /*if (!Gate::allows('$destroy-contact', $contact)) {
             abort(403);
-        }
+        }*/
         $contact->delete();
         return to_route('contact.index');
     }

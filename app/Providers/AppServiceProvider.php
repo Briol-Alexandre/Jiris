@@ -24,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        //Authorisation avec des gates
+        /*
         Gate::define('update-jiri', function (User $user, Jiri $jiri){
             return $user->id === $jiri->user_id;
         });
@@ -63,7 +65,7 @@ class AppServiceProvider extends ServiceProvider
 
         Gate::define('destroy-project', function (User $user, Project $project){
             return $user->id === $project->user_id;
-        });
+        });*/
 
     }
 }

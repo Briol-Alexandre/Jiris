@@ -43,9 +43,9 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        if (!Gate::allows('show-project', $project)) {
+        /*if (!Gate::allows('show-project', $project)) {
             abort(403);
-        }
+        }*/
         return view('projects.show', compact('project'));
     }
 
@@ -62,9 +62,9 @@ class ProjectController extends Controller
      */
     public function update(ProjectStoreRequest $request, Project $project)
     {
-        if (!Gate::allows('update-contact', $project)) {
+        /*if (!Gate::allows('update-contact', $project)) {
             abort(403);
-        }
+        }*/
         $project->update($request->validated());
         return to_route('project.show', $project);
     }
@@ -74,9 +74,9 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        if (!Gate::allows('destroy-project', $project)) {
+        /*if (!Gate::allows('destroy-project', $project)) {
             abort(403);
-        }
+        }*/
         $project->delete();
         return to_route('project.index');
     }

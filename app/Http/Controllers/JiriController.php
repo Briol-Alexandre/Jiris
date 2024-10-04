@@ -48,9 +48,9 @@ class JiriController extends Controller
      */
     public function show(Jiri $jiri)
     {
-        if (! Gate::allows('show-jiri', $jiri)) {
+        /*if (! Gate::allows('show-jiri', $jiri)) {
             abort(403);
-        }
+        }*/
         return view('jiri.show', compact('jiri'));
     }
 
@@ -67,9 +67,9 @@ class JiriController extends Controller
      */
     public function update(JiriStoreRequest $request, Jiri $jiri)
     {
-        if (! Gate::allows('update-jiri', $jiri)) {
+        /*if (! Gate::allows('update-jiri', $jiri)) {
             abort(403);
-        }
+        }*/
 
         $jiri->update($request->validated());
         return to_route('jiri.show', $jiri);
