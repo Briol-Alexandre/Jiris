@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectStoreRequest;
 use App\Models\Project;
+use Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ProjectController extends Controller
 {
@@ -14,7 +16,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $projects = Auth::user()->projects()->get();
         return view('projects.index', compact('projects'));
     }
 
@@ -39,9 +41,11 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Project $project)
     {
-        $project = Project::findOrFail($id);
+        if (!Gate::allows('show-project', $project)) {
+            abort(403);
+        }
         return view('projects.show', compact('project'));
     }
 
@@ -50,7 +54,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('project.edit', compact('project'));
+        return view('projects.edit', compact('project'));
     }
 
     /**
@@ -58,6 +62,9 @@ class ProjectController extends Controller
      */
     public function update(ProjectStoreRequest $request, Project $project)
     {
+        if (!Gate::allows('update-contact', $project)) {
+            abort(403);
+        }
         $project->update($request->validated());
         return to_route('project.show', $project);
     }
@@ -67,6 +74,9 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if (!Gate::allows('destroy-project', $project)) {
+            abort(403);
+        }
         $project->delete();
         return to_route('project.index');
     }

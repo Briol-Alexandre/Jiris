@@ -37,11 +37,6 @@
                    placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam animi aspernatur beatae consequatur dolorem impedit necessitatibus nisi non odio, rerum sed ut. At cum cupiditate, dignissimos dolorum facere nemo sapiente?">
 
         </div>
-        <div>
-            <button type="submit"
-                    class="bg-blue-500 font-bold text-white mt-3 rounded-md p-2 px-4 tracking-wider uppercase">
-                {{ __('Edit this Project') }}
-            </button>
-        </div>
+        <x-forms.controls.button text="Edit this Project"/>
     </form>
 </x-layouts.main>

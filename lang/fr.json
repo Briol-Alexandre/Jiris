@@ -28,5 +28,8 @@
     "Edit this Contact": "Modifier ce Contact",
     "Delete this Project": "Supprimer ce Projet",
     "Delete this Contact": "Supprimer ce Contact",
-    "Delete this Jiri": "Supprimer ce Jiri"
+    "Delete this Jiri": "Supprimer ce Jiri",
+    "logout": "déconnexion",
+    "login": "connexion",
+    "register": "identification"
 }

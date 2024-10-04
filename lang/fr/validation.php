@@ -191,7 +191,7 @@ return [
 
     'attributes' => [
         'name'=>'nom',
-        'starting_at'=>'date du Jiri'
+        'starting_at'=>'date de début'
     ],
 
 ];

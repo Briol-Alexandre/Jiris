@@ -16,11 +16,7 @@
                 </time>
             </dd>
         </div>
-        <div>
-            <a href="{{ route('jiri.edit', $jiri) }}"
-               class="bg-blue-500 font-bold text-white mt-3 rounded-md p-2 px-4 tracking-wider uppercase">
-                {{ __('Edit Jiri') }}</a>
-        </div>
+        <x-forms.controls.link text="Edit Jiri" url="{{ route('jiri.edit', $jiri) }}"/>
         <form action="{{ route('jiri.destroy', $jiri) }}"
               method="post">
             @csrf

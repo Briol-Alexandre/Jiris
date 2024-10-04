@@ -38,10 +38,7 @@
 
         </div>
         <div>
-            <button type="submit"
-                    class="bg-blue-500 font-bold text-white mt-3 rounded-md p-2 px-4 tracking-wider uppercase">
-                {{ __('Edit this Contact') }}
-            </button>
+            <x-forms.controls.button text="Edit this Contact"/>
         </div>
     </form>
 </x-layouts.main>

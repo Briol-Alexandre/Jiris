@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactStoreRequest;
 use App\Models\Contact;
+use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ContactController extends Controller
 {
@@ -13,7 +15,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::all();
+        $contacts = Auth::user()->contacts()->get();
         return view('contact.index', compact('contacts'));
     }
 
@@ -38,9 +40,11 @@ class ContactController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Contact $contact)
     {
-        $contact = Contact::findOrFail($id);
+        if (!Gate::allows('show-contact', $contact)) {
+            abort(403);
+        }
         return view('contact.show', compact('contact'));
     }
 
@@ -57,6 +61,9 @@ class ContactController extends Controller
      */
     public function update(ContactStoreRequest $request, Contact $contact)
     {
+        if (!Gate::allows('update-contact', $contact)) {
+            abort(403);
+        }
         $contact->update($request->validated());
         return to_route('contact.show', $contact);
     }
@@ -66,6 +73,9 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
+        if (!Gate::allows('$destroy-contact', $contact)) {
+            abort(403);
+        }
         $contact->delete();
         return to_route('contact.index');
     }

@@ -15,7 +15,7 @@
             <main class="flex flex-col gap-4 px-4">
                 {{ $slot }}
             </main>
-            <div class="p-4 bg-blue-600">
+            <div class="p-4 bg-blue-500">
                 <x-navigations.main/>
             </div>
         </div>

@@ -9,11 +9,7 @@
             <dt class="font-bold">{{__('Contact Email')}}</dt>
             <dd>{{ $contact->email }}</dd>
         </div>
-        <div>
-            <a href="{{ route('contact.edit', $contact) }}"
-               class="bg-blue-500 font-bold text-white mt-3 rounded-md p-2 px-4 tracking-wider uppercase">
-                {{ __('Edit this Contact') }}</a>
-        </div>
+        <x-forms.controls.link text="Edit this Contact" url=" {{ route('contact.edit', $contact) }}"/>
         <form action="{{ route('contact.destroy', $contact) }}"
               method="post">
             @csrf

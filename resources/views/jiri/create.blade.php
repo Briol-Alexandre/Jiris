@@ -35,11 +35,6 @@
                    id="date"
                    placeholder="2024-06-10 09:17">
         </div>
-        <div>
-            <button type="submit"
-                    class="bg-blue-500 font-bold text-white mt-3 rounded-md p-2 px-4 tracking-wider uppercase">
-                {{ __('Create this Jiri') }}
-            </button>
-        </div>
+        <x-forms.controls.button text="Create this Jiri" />
     </form>
 </x-layouts.main>

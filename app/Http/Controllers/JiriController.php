@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\JiriStoreRequest;
 use App\Models\Jiri;
+use Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class JiriController extends Controller
 {
@@ -14,11 +16,10 @@ class JiriController extends Controller
      */
     public function index()
     {
-        $upcomingJiris = Jiri::where('starting_at', '>', now())
-            ->orderBy('starting_at')
+
+        $upcomingJiris = Auth::user()?->upcomingJiris()
             ->get();
-        $pastJiris = Jiri::where('starting_at', '<=', now())
-            ->orderBy('starting_at', 'desc')
+        $pastJiris = Auth::user()?->pastJiris()
             ->get();
 
         return view('jiri.index', compact('upcomingJiris', 'pastJiris'));
@@ -47,6 +48,9 @@ class JiriController extends Controller
      */
     public function show(Jiri $jiri)
     {
+        if (! Gate::allows('show-jiri', $jiri)) {
+            abort(403);
+        }
         return view('jiri.show', compact('jiri'));
     }
 
@@ -63,8 +67,14 @@ class JiriController extends Controller
      */
     public function update(JiriStoreRequest $request, Jiri $jiri)
     {
+        if (! Gate::allows('update-jiri', $jiri)) {
+            abort(403);
+        }
+
         $jiri->update($request->validated());
         return to_route('jiri.show', $jiri);
+
+
     }
 
     /**
@@ -72,6 +82,9 @@ class JiriController extends Controller
      */
     public function destroy(Jiri $jiri)
     {
+        if (!Gate::allows('destroy-jiri', $jiri)) {
+            abort(403);
+        }
         $jiri->delete();
         return to_route('jiri.index');
     }

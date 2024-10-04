@@ -9,11 +9,7 @@
             <dt class="font-bold">{{__('Project Description')}}</dt>
             <dd>{{ $project->description }}</dd>
         </div>
-        <div>
-            <a href="{{ route('project.edit', $project) }}"
-               class="bg-blue-500 font-bold text-white mt-3 rounded-md p-2 px-4 tracking-wider uppercase">
-                {{ __('Edit Project') }}</a>
-        </div>
+        <x-forms.controls.link text="Edit Project" url="{{ route('project.edit', $project) }}"/>
         <form action="{{ route('project.destroy', $project) }}"
               method="post">
             @csrf

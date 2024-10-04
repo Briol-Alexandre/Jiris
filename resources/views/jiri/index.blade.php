@@ -8,11 +8,7 @@
         <h2 class="font-bold">{{ __('Past Jiris') }}</h2>
         <x-jiris.list :jiris="$pastJiris"/>
     </section>
-    <div>
-        <a href="{{ route('jiri.create') }}"
-           class="bg-blue-500 font-bold text-white mt-3 rounded-md p-2 px-4 tracking-wider uppercase">
-            {{ __('Create a new Jiri') }}</a>
-    </div>
+    <x-forms.controls.link text="Create a new Jiri" url="{{ route('jiri.create')}}" />
 </x-layouts.main>
 
 
