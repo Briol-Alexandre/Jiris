@@ -8,14 +8,14 @@
         <title>Jiri</title>
         @vite('resources/css/app.css')
     </head>
-    <body class="pb-4 font-sans">
+    <body class="font-sans">
         <a class="sr-only"
            href="#main-menu">{{ __('Go to the main menu') }}</a>
         <div class="flex flex-col-reverse gap-6">
             <main class="flex flex-col gap-4 px-4">
                 {{ $slot }}
             </main>
-            <div class="p-4 bg-blue-500">
+            <div class="p-4 bg-gray-800">
                 <x-navigations.main/>
             </div>
         </div>

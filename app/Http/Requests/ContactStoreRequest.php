@@ -23,7 +23,8 @@ class ContactStoreRequest extends FormRequest
     {
         return [
             'name'=>'required',
-            'email'=>'email|required'
+            'email'=>'email|required',
+            'picture'=>'image|nullable'
         ];
     }
 }

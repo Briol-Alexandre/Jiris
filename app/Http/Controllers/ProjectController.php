@@ -33,7 +33,8 @@ class ProjectController extends Controller
      */
     public function store(ProjectStoreRequest $request): RedirectResponse
     {
-        $project = Project::create($request->validated());
+        $project= Auth::user()->projects()->create($request->validated());
+
 
         return to_route('project.show', $project);
     }

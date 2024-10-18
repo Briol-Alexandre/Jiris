@@ -76,4 +76,9 @@ class User extends Authenticatable
             ->where('starting_at', '>=', now())
             ->orderBy('starting_at');
     }
+
+    public function attendances(): HasMany
+    {
+        return $this->hasMany(Attendance::class);
+    }
 }

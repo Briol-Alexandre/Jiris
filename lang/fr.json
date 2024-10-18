@@ -16,11 +16,13 @@
     "at": "à",
     "Edit": "Modifier",
     "Your projects": "Vos projets",
+    "Your Projects": "Vos Projets",
     "Project Name": "Nom du Projet",
     "Project Description": "Description du Projet",
     "Your Contacts" : "Vos Contacts",
     "Contact Name" : "Nom du Contact",
     "Contact Email" : "Email du Contact",
+    "Contact's Image" : "Image du Contact",
     "Should be in the format": "Doit être au format",
     "Edit Jiri": "Modifier ce Jiri",
     "Edit Project": "Modifier ce Projet",
@@ -31,5 +33,13 @@
     "Delete this Jiri": "Supprimer ce Jiri",
     "logout": "déconnexion",
     "login": "connexion",
-    "register": "identification"
+    "register": "identification",
+    "Students": "Étudiants",
+    "Evaluators": "Évaluateurs",
+    "student": "Étudiant",
+    "evaluator": "Évaluateur",
+    "Change to student": "Changer en étudiant",
+    "Change to evaluator": "Changer en évaluateur",
+    "There's no students in this jiri": "Il n'y a pas d'édudiants dans ce jiri",
+    "There's no evaluators in this jiri": "Il n'y a pas d'évaluateurs dans ce jiri"
 }

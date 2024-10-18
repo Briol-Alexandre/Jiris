@@ -12,15 +12,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('contact.create');
 
     Route::get('/contacts/{contact}/edit', [ContactController::class, 'edit'])
+        ->can('update', 'contact')
         ->name('contact.edit');
 
     Route::patch('/contacts/{contact}/edit', [ContactController::class, 'update'])
+        ->can('update', 'contact')
         ->name('contact.update');
 
     Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])
+        ->can('delete', 'contact')
         ->name('contact.destroy');
 
     Route::get('/contacts/{contact}', [ContactController::class, 'show'])
+        ->can('view', 'contact')
         ->name('contact.show');
 
     Route::post('/contacts', [ContactController::class, 'store'])

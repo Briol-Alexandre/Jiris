@@ -2,11 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\Jiri;
+use App\Enums\ContactRole;
+use App\Models\Attendance;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class JiriPolicy
+class AttendancePolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,9 +20,9 @@ class JiriPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Jiri $jiri): bool
+    public function view(User $user, Attendance $attendance): bool
     {
-        return $user->id === $jiri->user_id;
+        //
     }
 
     /**
@@ -35,23 +36,25 @@ class JiriPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Jiri $jiri): bool
+    public function update(User $user, Attendance $attendance): bool
     {
-        return $user->id === $jiri->user_id;
+        return
+            $user->id === $attendance->jiri->user_id &&
+            $user->id === $attendance->contact->user_id;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Jiri $jiri): bool
+    public function delete(User $user, Attendance $attendance): bool
     {
-        return $user->id === $jiri->user_id;
+        //
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Jiri $jiri): bool
+    public function restore(User $user, Attendance $attendance): bool
     {
         //
     }
@@ -59,7 +62,7 @@ class JiriPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Jiri $jiri): bool
+    public function forceDelete(User $user, Attendance $attendance): bool
     {
         //
     }

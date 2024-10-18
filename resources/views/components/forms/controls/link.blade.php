@@ -1,5 +1,5 @@
 <div>
     <a href="{{$url}}"
-       class="bg-blue-500 font-bold text-white mt-3 rounded-md p-2 px-4 tracking-wider uppercase">
+       class="bg-gray-800 font-bold text-white mt-3 rounded-md p-2 px-4 tracking-wider uppercase border-2 border-gray-800 hover:text-gray-800 hover:bg-white">
         {{ __($text) }}</a>
 </div>

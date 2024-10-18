@@ -13,6 +13,11 @@ return new class extends Migration {
         Schema::table('jiris', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
         });
+
+        Schema::table('attendances', function (Blueprint $table) {
+            $table->foreign('jiri_id')->references('id')->on('jiris');
+            $table->foreign('contact_id')->references('id')->on('contacts');
+        });
     }
 
     /**
@@ -22,6 +27,10 @@ return new class extends Migration {
     {
         Schema::table('jiris', function (Blueprint $table){
             $table->dropForeign('user_id');
+        });
+        Schema::table('attendances', function (Blueprint $table){
+            $table->dropForeign('jiri_id');
+            $table->dropForeign('contact_id');
         });
     }
 };

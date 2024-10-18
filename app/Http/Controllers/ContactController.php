@@ -32,9 +32,19 @@ class ContactController extends Controller
      */
     public function store(ContactStoreRequest $request)
     {
-        $contact = Contact::create($request->validated());
+        $validated = $request->validated();
 
-        return to_route('contact.show', $contact);
+        $picture = $request->file('picture');
+
+        $path = $picture->store(
+            'pictures/' . Auth::id(), 'public'
+        );
+
+        $validated['picture'] = $path;
+
+        $contact = Auth::user()->contacts()->create($validated);
+
+        return to_route('contact.show', compact('contact'));
     }
 
     /**
@@ -42,9 +52,6 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
-        /*if (!Gate::allows('show-contact', $contact)) {
-            abort(403);
-        }*/
         return view('contact.show', compact('contact'));
     }
 
@@ -61,9 +68,6 @@ class ContactController extends Controller
      */
     public function update(ContactStoreRequest $request, Contact $contact)
     {
-        /*if (!Gate::allows('update-contact', $contact)) {
-            abort(403);
-        }*/
         $contact->update($request->validated());
         return to_route('contact.show', $contact);
     }

@@ -1,6 +1,7 @@
 <x-layouts.main>
     <form action="{{ route('contact.store') }}"
           method="post"
+          enctype="multipart/form-data"
           class="flex flex-col gap-8 bg-slate-50 p-4">
         @csrf
         <div class="flex flex-col gap-2">
@@ -35,8 +36,20 @@
                    placeholder="john.doe@example.com">
 
         </div>
+        <div class="flex flex-col gap-2">
+            <label for="picture"
+                   class="font-bold">{{__('Contact Email')}}
+                @error('picture')
+                <span class="block text-red-500">{{ $message }}</span>
+                @enderror
+            </label>
+            <input class="border border-grey-700 focus:invalid:border-pink-500 invalid:text-pink-600 rounded-md p-2"
+                   type="file"
+                   id="picture"
+                   name="picture"/>
+
+        </div>
         <x-forms.controls.button text="Create this Contact"/>
 
-
-
+    </form>
 </x-layouts.main>

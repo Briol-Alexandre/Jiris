@@ -11,15 +11,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('project.create');
 
     Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])
+        ->can('update', 'project')
         ->name('project.edit');
 
     Route::patch('/projects/{project}/edit', [ProjectController::class, 'update'])
+        ->can('update', 'project')
         ->name('project.update');
 
     Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])
+        ->can('delete', 'project')
         ->name('project.destroy');
 
     Route::get('/projects/{project}', [ProjectController::class, 'show'])
+        ->can('view', 'project')
         ->name('project.show');
 
     Route::post('/projects', [ProjectController::class, 'store'])

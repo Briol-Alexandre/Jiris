@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Jiri;
+use App\Models\Assignment;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class JiriSeeder extends Seeder
+class AssignmentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Jiri::factory(1)->create();
+        Assignment::factory(6)->create();
     }
 }

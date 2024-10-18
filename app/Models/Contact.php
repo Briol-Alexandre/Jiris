@@ -13,6 +13,7 @@ class Contact extends Model
     protected $fillable = [
         'name',
         'email',
+        'picture'
     ];
 
     public function user(): BelongsTo

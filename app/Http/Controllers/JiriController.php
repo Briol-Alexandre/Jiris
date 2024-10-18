@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ContactRole;
 use App\Http\Requests\JiriStoreRequest;
 use App\Models\Jiri;
 use Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 
 class JiriController extends Controller
 {
@@ -30,7 +32,9 @@ class JiriController extends Controller
      */
     public function create()
     {
-        return view('jiri.create');
+        $contacts = Auth::user()?->contacts()->get();
+        $projects = Auth::user()?->projects()->get();
+        return view('jiri.create', compact('contacts', 'projects'));
     }
 
     /**
@@ -38,7 +42,26 @@ class JiriController extends Controller
      */
     public function store(JiriStoreRequest $request): RedirectResponse
     {
-        $jiri = Jiri::create($request->validated());
+        $jiri = Auth::user()?->jiris()->create($request->validated());
+
+        $collection = $request->collect();
+        $students = $collection->filter(function ($value, $key) {
+            if ($value === ContactRole::Student->value) {
+                return $key;
+            }
+        });
+
+        $evaluators = $collection->filter(function ($value, $key) {
+            if ($value === ContactRole::Evaluator->value) {
+                return $key;
+            }
+        });
+
+
+
+        $jiri->students()->attach(array_keys($students->toArray()));
+        $jiri->evaluators()->attach(array_keys($evaluators->toArray()));
+        $jiri->projects()->attach($request->projects);
 
         return to_route('jiri.show', $jiri);
     }
@@ -48,9 +71,7 @@ class JiriController extends Controller
      */
     public function show(Jiri $jiri)
     {
-        /*if (! Gate::allows('show-jiri', $jiri)) {
-            abort(403);
-        }*/
+        $jiri->load('students', 'evaluators');
         return view('jiri.show', compact('jiri'));
     }
 
@@ -59,7 +80,13 @@ class JiriController extends Controller
      */
     public function edit(Jiri $jiri)
     {
-        return view('jiri.edit', compact('jiri'));
+        $contacts = Auth::user()?->contacts()->get();
+        $projects = Auth::user()?->projects()->get();
+        $students = $jiri->students()->get();
+        $evaluators = $jiri->evaluators()->get();
+        $unaffectedContacts = $contacts->diff($students->merge($evaluators));
+
+        return view('jiri.edit', compact('jiri', 'projects', 'students', 'evaluators', 'unaffectedContacts'));
     }
 
     /**
@@ -82,9 +109,6 @@ class JiriController extends Controller
      */
     public function destroy(Jiri $jiri)
     {
-        if (!Gate::allows('destroy-jiri', $jiri)) {
-            abort(403);
-        }
         $jiri->delete();
         return to_route('jiri.index');
     }

@@ -17,14 +17,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('jiri.store');
 
     Route::get('/jiris/{jiri}/edit', [JiriController::class, 'edit'])
+        ->can('update', 'jiri')
         ->name('jiri.edit');
 
     Route::patch('/jiris/{jiri}/edit', [JiriController::class, 'update'])
+        ->can('update', 'jiri')
         ->name('jiri.update');
 
     Route::delete('/jiris/{jiri}', [JiriController::class, 'destroy'])
+        ->can('delete', 'jiri')
         ->name('jiri.destroy');
 
     Route::get('/jiris/{jiri}', [JiriController::class, 'show'])
+        ->can('view', 'jiri')
         ->name('jiri.show');
 });
